@@ -1,0 +1,26 @@
+{
+  "name": "express-people-dictionary",
+  "version": "1.0.0",
+  "description": "backend api for people dictionary",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "nodemon ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc"
+  },
+  "author": "RickBm400",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^8.5.1",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.11",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.5.3"
+  }
+}
