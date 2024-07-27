@@ -1,11 +1,13 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
+let morgan = require('morgan');
 import dotenv from 'dotenv';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import router from "./routes"
 dotenv.config();
 const app: Express = express();
 const mongoURL: string = process.env.DB_CONNECTION ? process.env.DB_CONNECTION : '';
 
+app.use(morgan(':method :url :response-time :remote-user'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/api/', router);
