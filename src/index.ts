@@ -1,33 +1,37 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
-let morgan = require('morgan');
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import router from "./routes"
-dotenv.config();
-const app: Express = express();
-const mongoURL: string = process.env.DB_CONNECTION ? process.env.DB_CONNECTION : '';
+import express, { Express, Request, Response } from "express";
+import dotenv from "dotenv";
+import router from "./routes";
+import connectDB from "./config/db";
+let morgan = require("morgan");
 
-app.use(morgan(':method :url :response-time :remote-user'));
+dotenv.config();
+type envInterface = {
+  PORT: string;
+  DB_CONNECTION: string;
+};
+
+// dotenv variables
+const { DB_CONNECTION, PORT }: envInterface = process.env as any;
+
+// declare express aplication
+const app: Express = express();
+
+// Express middleware
+app.use(morgan(":method :url :response-time :remote-user"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/api/', router);
 
-(async () => {
-    try {
-        if (mongoose.connection.readyState !== 1) {
-            await mongoose.connect(mongoURL);
-        }
-        console.log('Connected to mongodb');
-    } catch (error) {
-        console.log(error);
-        process.exit(1)
-    }
-})();
+// Set API routes
+app.use("/api/", router);
+
+// MongoDb connection
+connectDB(DB_CONNECTION);
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Express + TypeScript Server");
+  res.send("Express + TypeScript Server");
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Listen app on port ${process.env.PORT}`)
-})
+// Set http server
+app.listen(PORT, () => {
+  console.log(`Listen app on port ${PORT}`);
+});
