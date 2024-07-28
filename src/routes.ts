@@ -1,6 +1,6 @@
 import { Router } from "express";
-import userRouter from "./user/user.Routes";
-let router = Router()
+import userRouter from "./routes/user.Routes";
+let router = Router();
 
-router.use("/user", userRouter)
-export default router
+router.use("/user", userRouter);
+export default router;
