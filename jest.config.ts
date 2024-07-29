@@ -5,6 +5,7 @@ const config: Config = {
   verbose: true,
   preset: "ts-jest",
   testEnvironment: "node",
+  setupFilesAfterEnv: ["./src/__tests__/setup.ts"],
   testMatch: ["**/__tests__/**/*.test.ts"],
   moduleFileExtensions: [...defaults.moduleFileExtensions, "mts"],
 };
