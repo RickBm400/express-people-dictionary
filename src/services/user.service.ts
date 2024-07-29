@@ -22,6 +22,16 @@ class UserService extends BaseService<IUser> {
   async delete(id: string): Promise<void> {
     await User.findByIdAndDelete(id).lean().exec();
   }
+
+  async userLogin({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<any> {
+    await User.find({ email, password });
+  }
 }
 
 export default new UserService();
