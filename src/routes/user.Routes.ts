@@ -1,7 +1,7 @@
 import { Router } from "express";
 const AsyncHandler = require("express-async-handler");
-let { getUser } = require("../controllers/user.Controller");
+import { getUsers, addUser } from "../controllers/user.Controller";
 let userRouter = Router();
 
-userRouter.get("/", AsyncHandler(getUser));
+userRouter.get("/", AsyncHandler(getUsers));
 export default userRouter;

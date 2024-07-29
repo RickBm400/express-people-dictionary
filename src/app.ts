@@ -2,16 +2,13 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import router from "./routes";
 import connectDB from "./config/db";
+import type { env } from "./types/env.types";
 let morgan = require("morgan");
 
 dotenv.config();
-type envInterface = {
-  PORT: string;
-  DB_CONNECTION: string;
-};
 
 // dotenv variables
-const { DB_CONNECTION, PORT }: envInterface = process.env as any;
+const { DB_CONNECTION, PORT }: env = process.env as any;
 
 // declare express aplication
 const app: Express = express();
