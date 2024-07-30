@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 describe("TEST: User endpoints", () => {
   const mockUser: any = {
-    name: "carlos",
+    name: "mocking",
     email: "mock@gmail.com",
     lastName: "mock",
     password: "test1234",
