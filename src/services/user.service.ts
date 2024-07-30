@@ -11,8 +11,8 @@ class UserService extends BaseService<IUser> {
     return await User.find().lean().exec();
   }
 
-  async findOne(id: string): Promise<IUser | null> {
-    return await User.findById(id).lean().exec();
+  async findOne(email: string): Promise<IUser | null> {
+    return await User.findOne({ email: email });
   }
 
   async update(id: string, user: IUser): Promise<IUser | null> {
@@ -21,16 +21,6 @@ class UserService extends BaseService<IUser> {
 
   async delete(id: string): Promise<void> {
     await User.findByIdAndDelete(id).lean().exec();
-  }
-
-  async userLogin({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }): Promise<any> {
-    await User.find({ email, password });
   }
 }
 

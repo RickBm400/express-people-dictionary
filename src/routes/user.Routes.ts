@@ -1,9 +1,12 @@
 import { Router } from "express";
 const AsyncHandler = require("express-async-handler");
-import { getUsers, postNewUser } from "../controllers/user.Controller";
+import userController from "../controllers/user.Controller";
 let userRouter = Router();
 
-userRouter.get("/", AsyncHandler(getUsers));
+userRouter.get("/", AsyncHandler(userController.getUsers));
 
-userRouter.post("/create-user", AsyncHandler(postNewUser));
+userRouter.post("/login", AsyncHandler(userController.login));
+
+userRouter.post("/create-user", AsyncHandler(userController.postNewUser));
+
 export default userRouter;
