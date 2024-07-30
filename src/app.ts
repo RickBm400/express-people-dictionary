@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import router from "./routes";
-import connectDB from "./config/db";
+import { connectDB } from "./config/db";
 import type { env } from "./types/env.types";
 let morgan = require("morgan");
 
@@ -32,3 +32,5 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`Listen app on port ${PORT}`);
 });
+
+export default app;

@@ -1,6 +1,6 @@
-import { connection, connect } from "mongoose";
+import { connect, connection } from "mongoose";
 
-export default async function connectDB(DB_CONNECTION: string): Promise<any> {
+async function connectDB(DB_CONNECTION: string): Promise<any> {
   try {
     if (connection.readyState !== 1) {
       await connect(DB_CONNECTION);
@@ -11,3 +11,9 @@ export default async function connectDB(DB_CONNECTION: string): Promise<any> {
     process.exit(1);
   }
 }
+
+async function disconnectDB() {
+  await connection.close();
+}
+
+export { connectDB, disconnectDB };
