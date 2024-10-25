@@ -1,6 +1,5 @@
 import { Request, response, Response } from "express";
-import { userService, bcryptService } from "../services";
-import { IUser } from "../models/user.model";
+import { userService, bcryptService } from "../repository";
 import { setWebToken } from "../utils/jwt";
 
 const getUsers = async (req: Request, res: Response) => {

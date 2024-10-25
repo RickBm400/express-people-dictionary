@@ -1,7 +1,7 @@
-import BaseService from "./base.service";
 import User, { IUser } from "../models/user.model";
+import userRepository from "./base.service";
 
-class UserService extends BaseService<IUser> {
+class UserService implements userRepository<IUser> {
   async create(user: IUser): Promise<IUser> {
     const newUser = new User(user);
     return await newUser.save();
