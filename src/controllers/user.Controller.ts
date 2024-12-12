@@ -21,8 +21,11 @@ const postNewUser = async (req: Request, res: Response) => {
     }
     user.password = await bcryptService.makeHash(user.password);
     const newUSer = await userService.create(user);
-    res.status(200).json({ message: "user created", user: newUSer });
+    res
+      .status(200)
+      .json({ message: "user created, redirect to dashboard", user: newUSer });
   } catch (error: any) {
+    console.log(error);
     res.status(500).send(error.message);
   }
 };
@@ -31,19 +34,14 @@ const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const user: any = await userService.findOne(email);
-    if (!user) {
-      throw new Error("user doesn't exist");
-    }
+    if (!user) throw new Error("user doesn't exist");
 
     const isPassword = bcryptService.compareHash(password, user.password);
-    if (!isPassword) {
-      throw new Error("Incorrect password");
-    }
+    if (!isPassword) throw new Error("Incorrect password");
 
     const jwt = setWebToken({ id: user.id, email: user.email });
-
     return res.status(200).json({
-      message: "user logged successfully",
+      message: "Redirect to user dashboard",
       token: jwt,
     });
   } catch (error: any) {
